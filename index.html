@@ -107,33 +107,5 @@ search.addEventListener('input',render);
 document.getElementById('reset').addEventListener('click',()=>{search.value='';activeCategory='All';document.querySelectorAll('[data-category]').forEach(b=>b.classList.toggle('active',b.dataset.category==='All'));render();});
 render();
 </script>
-<script>
-/**
- * 全自动 Sitemap 生成器
- * 原理：自动抓取当前页面上所有的有效链接，生成 XML 格式。
- */
-document.addEventListener("DOMContentLoaded", function() {
-   // 1. 获取当前页面的基础 URL
-   const baseUrl = window.location.origin + window.location.pathname;
-  
-   // 2. 收集页面上所有的链接
-   const links = Array.from(document.querySelectorAll('a[href]'))
-       .map(a => a.href) // 获取完整链接
-       .filter(href => href.startsWith(baseUrl)); // 只保留站内链接
-   // 3. 去重
-   const uniqueLinks = [...new Set(links)];
-   // 4. 生成 XML 内容
-   let xmlContent = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  
-   uniqueLinks.forEach(link => {
-       xmlContent += `  <url>\n    <loc>${link}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
-   });
-  
-   xmlContent += '</urlset>';
-   // 5. 将生成的 XML 内容输出到控制台，供开发者复制保存为 sitemap.xml
-   console.log("--- 自动生成的 Sitemap 内容 ---");
-   console.log(xmlContent);
-   console.log("-------------------------------");
-});
-</script>
+
 </body></html>
